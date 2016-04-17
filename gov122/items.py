@@ -15,3 +15,5 @@ class Gov122Item(scrapy.Item):
     kkrs = scrapy.Field()
     kscc = scrapy.Field()
     ksrq = scrapy.Field()
+    kskm = scrapy.Field()
+    kscx = scrapy.Field()

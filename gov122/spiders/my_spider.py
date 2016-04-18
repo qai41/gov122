@@ -22,7 +22,7 @@ class GovSpider(scrapy.spiders.Spider):
 
         # 列举了以下考场：1.三门峡考练考场科目一；2.渑池县车管所科目一考场；3.义马科目一考场；4.三门峡市交警支队科目二考场(隐藏)；
         # 5.三门峡科目二交通考场；6.三门峡科目二渑池车管所考场；7.三门峡渑池友谊考场；8.三门峡支队科目三小车考场； 9.三门峡渑池小车科目三考场；
-        #10.三门峡科目二全顺考场C2；11.三门峡市交警支队科目四考场；
+        #10.三门峡科目二全顺考场C2；11.三门峡市交警支队科目四考场；12.三门峡科目二全顺考场B2；
         # 下面的FormRequest模拟查询三门峡考练考场科目一
         yield FormRequest(url,formdata={'fzjg': '%E8%B1%ABM', 'kskm': '1','ksdd': '4112101', 'kscx': 'C1','startTime': start_time, 'endTime': '2116-06-03','zt': '0'},callback=self.after_parse)
         # 下面的FormRequest模拟查询渑池县车管所科目一考场
@@ -45,6 +45,8 @@ class GovSpider(scrapy.spiders.Spider):
         yield FormRequest(url,formdata={'fzjg': '%E8%B1%ABM', 'kskm': '2','ksdd': '4112207', 'kscx': 'C2','startTime': start_time, 'endTime': '2116-06-03','zt': '0'},callback=self.after_parse)
         # 下面的FormRequest模拟查询三门峡市交警支队科目四考场
         yield FormRequest(url,formdata={'fzjg': '%E8%B1%ABM', 'kskm': '4','ksdd': '4112101', 'kscx': 'C1','startTime': start_time, 'endTime': '2116-06-03','zt': '0'},callback=self.after_parse)
+        # 下面的FormRequest模拟查询三门峡科目二全顺考场B2
+        yield FormRequest(url,formdata={'fzjg': '%E8%B1%ABM', 'kskm': '2','ksdd': '4112207', 'kscx': 'B2','startTime': start_time, 'endTime': '2116-06-03','zt': '0'},callback=self.after_parse)
 
 
     def after_parse(self, response):

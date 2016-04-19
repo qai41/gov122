@@ -1,19 +1,21 @@
 #-*-coding:utf8-*-
 import scrapy
-from scrapy.http import FormRequest	# 模拟HTML表单POST	
-import json
-import datetime			# python返回当天日期
+from scrapy.http import FormRequest # 模拟HTML表单POST  
+import simplejson
+import datetime         # python返回当天日期
 from gov122.items import Gov122Item
 
 
 class GovSpider(scrapy.spiders.Spider):
-    name = "gov122"				# scrapy crawl gov122来启动爬虫
+    name = "gov122"             # scrapy crawl gov122来启动爬虫
     allowed_domains = ["ha.122.gov.cn"]
     start_urls = ["http://ha.122.gov.cn/m/examplan/getExamPlanDetail"]
     
 
     def parse(self, response):
         url = "http://ha.122.gov.cn/m/examplan/getExamPlanDetail"
+        global items
+        items = []
         
         #----python返回当天日期----#
         now = datetime.datetime.now()
@@ -50,25 +52,17 @@ class GovSpider(scrapy.spiders.Spider):
 
 
     def after_parse(self, response):
-        sites = json.loads(response.body_as_unicode())	# 网站返回的是JSON数据，这句用来转换
-        items = []
+        sites = simplejson.loads(response.body)                 # 转换成字典
+        
         for each in sites.get("data"):
             item = Gov122Item()
-            kcmc = each.get("kcmc")		# 考场名称："三门峡市XXX考场"
-            kscx = each.get("kscx")                 # 考试车型：C1/C2/B2
-            kskm = each.get("kskm")             # 考试科目
-            kkrs = each.get("kkrs")		# 考试计划人数
-            kscc = each.get("kscc")		# 考试场次：上午/下午
-            ksrq = each.get("ksrq")		# 考试日期：格式2016-05-20
-            # 打印：三门峡市XXX考场C1----KeMu1----2016-04-11(上午)----400;
-            print "%s%s----KeMu%s----%s(%s)----%s"%(kcmc,kscx,kskm,ksrq,kscc,kkrs)
-
-            # 若要收集Item，将爬取结果保存到数据库或进行其他操作。增加以下代码，并参照Scrapy文档拓展功能
-            #item["kcmc"] = each["kcmc"]        # 考场名称："三门峡市XXX考场"
-            #item["kskm"] = each["kskm"]        # 考试科目
-            #item["kscx"] = each["kscx"]        # 考试车型：C1/C2/B2
-            #item["kkrs"] = each["kkrs"]        # 考试计划人数
-            #item["kscc"] = each["kscc"]        # 考试场次：上午/下午
-            #item["ksrq"] = each["ksrq"]        # 考试日期：格式2016-05-20
-            #items.append(item)
-        #return items
+            item["kcmc"] = each["kcmc"]        # 考场名称："三门峡市XXX考场"
+            item["kskm"] = each["kskm"]        # 考试科目
+            item["kscx"] = each["kscx"]        # 考试车型：C1/C2/B2
+            item["kkrs"] = each["kkrs"]        # 考试计划人数
+            item["kscc"] = each["kscc"]        # 考试场次：上午/下午
+            item["ksrq"] = each["ksrq"]        # 考试日期：格式2016-05-20
+            # 打印：三门峡市XXX考场C1----科目1----2016-04-11(上午)----400人;
+            print "%s%s----%s%s----%s(%s)----%s%s"%(each["kcmc"],each["kscx"],u'\u79d1\u76ee',each["kskm"],each["ksrq"],each["kscc"],each["kkrs"],u'\u4eba')
+            items.append(item)
+        return items

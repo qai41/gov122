@@ -21,7 +21,7 @@ Several quick start options are available:
 ```
 * Clone the repo: `git clone https://github.com/qukaile/gov122.git`.
 * `$ cd gov122`.
-* `$ scrapy crawl gov122`.
+* `$ scrapy crawl gov122 --nolog`.
 
 ### What's included
 

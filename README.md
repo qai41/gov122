@@ -1,6 +1,6 @@
 # [Gov122](http://azacai.com/scrapypa-qu-jia-shi-ren-kao-shi-yu-yue-ji-hua/)
 
-2016年4月1日起,公安部令[[第139号]](http://www.mps.gov.cn/n16/n1282/n3493/n4390881/5036555.html)开始实施，申请驾照的驾驶人驾照考试均在 `122.gov.cn` 网站自主网上预约。以河南省辖区三门峡市为例，网站每天公布10天左右的考试计划，[手动查询地址](http://ha.122.gov.cn/views/examplanpub.html)。现编写爬虫代码，批量查询。
+2016年4月1日起,公安部令[第139号]开始实施，申请驾照的驾驶人驾照考试均在 `122.gov.cn` 网站自主网上预约。以河南省辖区三门峡市为例，网站每天公布10天左右的考试计划，[手动查询地址](http://ha.122.gov.cn/views/examplanpub.html)。同时考试预约结果公布[手动查询地址](http://ha.122.gov.cn/views/examappointpub.html)。现编写爬虫代码，批量查询。
 
 
 ## Table of contents
@@ -21,7 +21,8 @@ Several quick start options are available:
 ```
 * Clone the repo: `git clone https://github.com/qukaile/gov122.git`.
 * `$ cd gov122`.
-* `$ scrapy crawl gov122 --nolog`.
+* 查询计划: `$ scrapy crawl gov122 --nolog`.
+* 查询结果: `$ scrapy crawl gov122_result --nolog`.
 
 ### What's included
 
@@ -36,6 +37,7 @@ gov122/
 │   ├── settings.py
 │   └── spiders/
 │        ├── __init__.py
+│        ├── result_spider.py
 │        └── my_spider.py
 ├── LICENSE
 ├── README.md

@@ -43,3 +43,18 @@ gov122/
 ├── README.md
 └── scrapy.cfg
 ```
+
+### More
+
+放在云服务器里，可以编写简单的shell脚本：
+```
+$ vim gov122.sh
+
+#!/bin/bash
+cd gov122
+scrapy crawl gov122 --nolog
+scrapy crawl gov122_result --nolog
+
+$ chmod +x gov122.sh
+$ ./gov122.sh
+```

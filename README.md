@@ -65,8 +65,10 @@ $ ./gov122.sh
 ```
 1. 异常：未安装git
 处理：sudo apt-get install git
+
 2. 异常：service-identity
 处理：easy_install service_indentity
+
 3. 异常：pyasn1版本过低
 处理：下载相应高版本
 $ https://pypi.python.org/packages/f7/83/377e3dd2e95f9020dbd0dfd3c47aaa7deebe3c68d3857a4e51917146ae8b/pyasn1-0.1.9.tar.gz#md5=f00a02a631d4016818659d1cc38d229a
@@ -74,6 +76,7 @@ $ tar zxf pyasn1-0.1.9.tar.gz
 $ cd pyasn1-0.1.9
 $ python setup.py install
 $ python setup.py test # run unit tests
+
 4. 异常：未安装simplejson
 处理：pip install simplejson
 ```
